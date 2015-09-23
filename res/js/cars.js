@@ -6,11 +6,19 @@ $(function () {
     'res/png/Police.png',
     'res/png/taxi.png'
   ];
+
+  function move(x, y) {
+    var tile = window.tileDomMap[y][x];
+    this.dom
+      .css('top', tile.css('top'))
+      .css('left', tile.css('left'));
+  };
+
   function addCar(carID, tileCoord) {
-    car = {};
-    tile = window.tileDomMap[tileCoord[1]][tileCoord[0]];
+    car = {move:move};
+    var tile = window.tileDomMap[tileCoord[1]][tileCoord[0]];
     console.log(tile.css('top'), tile.css('left'));
-    rot = 45;
+    rot = 90;
     car.dom = $('<img>')
       .attr('src', CARS[carID])
       .attr('z-index', 100)

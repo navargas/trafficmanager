@@ -58,5 +58,8 @@ $(function() {
     }
   };
   loadAscii(asciiMap);
-  addCar(0, [2,2]);
+  var car1 = addCar(0, [13,2]);
+  var car2 = addCar(1, [2,2]);
+  var car3 = addCar(3, [2,10]);
+  var car4 = addCar(4, [13,10]);
 });
