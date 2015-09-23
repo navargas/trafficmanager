@@ -1,0 +1,57 @@
+$(function() {
+  var TILE_SIZE = 48;
+  var SPRITES = 'res/svg/tiles_vector.svg#'
+  var iconMap = {
+    "-":[8,1],
+    "=":[0,1],
+    "r":[1,0],
+    "n":[2,0],
+    "j":[2,1],
+    "i":[1,1],
+    "|":[0,0]
+  };
+  var asciiMap =
+    "---------------------\n" +
+    "---------------------\n" +
+    "---r==========n------\n" +
+    "---|----------|------\n" +
+    "---|----------|------\n" +
+    "---|----------|------\n" +
+    "---|----------|------\n" +
+    "---|----------|------\n" +
+    "---|----------|------\n" +
+    "---|----------|------\n" +
+    "---i==========j------\n" +
+    "---------------------\n" +
+    "---------------------";
+
+  function loadAscii(asciimap) {
+    var lines = asciimap.split('\n');
+    var x = 0;
+    var y = 0;
+    for (var i in lines) {
+      for (c in lines[i]) {
+        var character = lines[i][c];
+        var pos = iconMap[character];
+        if (! pos ) {
+          console.error('Unrecognized character <' + character + '> at ');
+          continue;
+        }
+        var index = pos[0] + '-' + pos[1];
+        var tile = $('<img>')
+          .attr('width', TILE_SIZE)
+          .attr('height', TILE_SIZE)
+          .css('position', 'absolute')
+          .css('top',y)
+          .css('left',x)
+          .attr('src', SPRITES + 'coord' + index);
+        $('#bgDiv').append(tile);
+        x += TILE_SIZE;
+      }
+      y += TILE_SIZE;
+      x = 0;
+    }
+  };
+
+  loadAscii(asciiMap);
+});
