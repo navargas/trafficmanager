@@ -11,25 +11,28 @@ $(function() {
     "|":[0,0]
   };
   var asciiMap =
-    "---------------------\n" +
-    "---------------------\n" +
-    "---r==========n------\n" +
-    "---|----------|------\n" +
-    "---|----------|------\n" +
-    "---|----------|------\n" +
-    "---|----------|------\n" +
-    "---|----------|------\n" +
-    "---|----------|------\n" +
-    "---|----------|------\n" +
-    "---i==========j------\n" +
-    "---------------------\n" +
-    "---------------------";
+    "-------------------\n" +
+    "-------------------\n" +
+    "--r==========n-----\n" +
+    "--|----------|-----\n" +
+    "--|----------|-----\n" +
+    "--|----------|-----\n" +
+    "--|----------|-----\n" +
+    "--|----------|-----\n" +
+    "--|----------|-----\n" +
+    "--|----------|-----\n" +
+    "--i==========j-----\n" +
+    "-------------------\n" +
+    "-------------------";
 
+  tileDomMap = [];
+  window.tileDomMap = tileDomMap;
   function loadAscii(asciimap) {
     var lines = asciimap.split('\n');
     var x = 0;
     var y = 0;
     for (var i in lines) {
+      tileDomMap.push([]);
       for (c in lines[i]) {
         var character = lines[i][c];
         var pos = iconMap[character];
@@ -41,17 +44,19 @@ $(function() {
         var tile = $('<img>')
           .attr('width', TILE_SIZE)
           .attr('height', TILE_SIZE)
+          .attr('z-index', 1000)
           .css('position', 'absolute')
           .css('top',y)
           .css('left',x)
           .attr('src', SPRITES + 'coord' + index);
         $('#bgDiv').append(tile);
-        x += TILE_SIZE;
+        tileDomMap[tileDomMap.length-1].push(tile);
+        x += TILE_SIZE-1;
       }
       y += TILE_SIZE;
       x = 0;
     }
   };
-
   loadAscii(asciiMap);
+  addCar(0, [2,2]);
 });
