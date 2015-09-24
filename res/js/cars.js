@@ -6,6 +6,13 @@ $(function () {
     'res/png/Police.png',
     'res/png/taxi.png'
   ];
+  var CARNAMES = {
+    'Ambulance': 'res/png/Ambulance.png',
+    'Audi': 'res/png/Audi.png',
+    'Mini_truck': 'res/png/Mini_truck.png',
+    'Police': 'res/png/Police.png',
+    'taxi': 'res/png/taxi.png',
+  }
 
   function move(x, y) {
     var tile = window.tileDomMap[y][x];
@@ -17,10 +24,9 @@ $(function () {
   function addCar(carID, tileCoord) {
     car = {move:move};
     var tile = window.tileDomMap[tileCoord[1]][tileCoord[0]];
-    console.log(tile.css('top'), tile.css('left'));
     rot = 90;
     car.dom = $('<img>')
-      .attr('src', CARS[carID])
+      .attr('src', CARNAMES[carID])
       .attr('z-index', 100)
       .css('top', tile.css('top'))
       .css('left', tile.css('left'))
